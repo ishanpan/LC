@@ -12,28 +12,23 @@
 class Solution {
 public:
     
-    bool issame = true;
-    void chk(TreeNode* p, TreeNode* q){
-        if(p!=NULL && q==NULL || p==NULL && q!=NULL  ){
-            issame = false;
-            return;
-        }
-        if(p!=NULL && q!=NULL && p->val!=q->val){
-            issame = false;
-             return;
-        }
-        if(p!=NULL && q!=NULL){
-            chk(p->left, q->left);
-            chk(p->right, q->right);
-        }
-        
-        
-    }
     
     bool isSameTree(TreeNode* p, TreeNode* q) {
         
-        chk(p,q);
-        return issame;
+        if(p!=NULL && q==NULL || p==NULL && q!=NULL  ){
+            return false;
+        }
+        if(p!=NULL && q!=NULL && p->val!=q->val){
+            return false;
+        }
+        bool s1=true;
+        bool s2=true;
+        if(p!=NULL && q!=NULL){
+             s1 = isSameTree(p->left, q->left);
+             s2 = isSameTree(p->right, q->right);
+        }
+        
+        return (s1&&s2);
         
     }
 };
