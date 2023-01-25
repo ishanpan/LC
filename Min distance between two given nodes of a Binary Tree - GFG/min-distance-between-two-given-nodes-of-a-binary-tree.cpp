@@ -125,28 +125,34 @@ class Solution{
         
     }
     
-    int findLevel(Node* root, int k, int level)
+    void findLevel(Node* root, int k, int level, int &l)
 {
-    if (root == NULL)
-        return -1;
-    if (root->data == k)
-        return level;
+    if (root == NULL){
+        return;
+    }
+    if (root->data == k){
+        l = level;
+        return;
+    }
  
-    int left = findLevel(root->left, k, level + 1);
-    if (left == -1)
-        return findLevel(root->right, k, level + 1);
-    return left;
+     findLevel(root->left, k, level + 1,l);
+   
+    findLevel(root->right, k, level + 1,l);
+    
 }
     
     int findDist(Node* root, int a, int b) {
         // Your code here
         Node* lcas = lca(root,a,b);
         
-        int ad = findLevel(lcas,a,0);
-        int bd = findLevel(lcas,b,0);
         
         
-        
+        int ad = 0;
+        int bd = 0;
+         
+        findLevel(lcas,a,0,ad);
+        findLevel(lcas,b,0,bd);
+ 
         return ad+bd;
         
         
