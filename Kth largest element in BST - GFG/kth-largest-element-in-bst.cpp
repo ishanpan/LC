@@ -97,29 +97,33 @@ struct Node {
 class Solution
 {
     public:
-    int kth(Node* root, priority_queue<int, vector<int>, greater<int> > &q ){
-        if(root==NULL){
-            return -1;
+    
+    void help(Node *root, int K, int &c, int &ans){
+        if(root==NULL || c>=K){
+            return;
         }
         
-        kth(root->left,q);
-        q.push(root->data);
-        kth(root->right,q);
+        help(root->right,K,c,ans);
+        c++;
+        if(c==K){
+            ans = root->data;
+            return;
+        }
+        
+        help(root->left,K,c,ans);
+        
+        
+        
         
     }
     
     int kthLargest(Node *root, int K)
     {
         //Your code here
-        priority_queue<int, vector<int>, greater<int> > q;
-        
-        kth(root,q);
-        
-        while(q.size()!=K){
-            q.pop();
-
-        }
-        return q.top();
+        int c = 0;
+        int ans = INT_MIN;
+        help(root,K,c,ans);
+        return ans;
     }
 };
 
