@@ -26,9 +26,7 @@ class Solution{
                 itr++;
             }
         }
-        vector<int>ans;
         vector<int>indegree(K,0);
-        
         for(int i=0;i<K;i++){
             for(auto x:adj[i]){
                 indegree[x]++;
@@ -40,20 +38,20 @@ class Solution{
                 q.push(i);
             }
         }
+        vector<int>ans;
         while(!q.empty()){
-            auto temp = q.front();
+            auto top = q.front();
             q.pop();
-            ans.push_back(temp);
-            
-            for(auto x:adj[temp]){
+            ans.push_back(top);
+            for(auto x:adj[top]){
                 indegree[x]--;
                 if(indegree[x]==0){
                     q.push(x);
                 }
             }
-
+            
         }
-        string anss = "";
+        string anss ="";
         for(auto x:ans){
             anss+=x+'a';
         }
