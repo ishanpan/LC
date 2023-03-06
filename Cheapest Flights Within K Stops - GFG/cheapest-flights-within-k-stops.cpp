@@ -23,7 +23,7 @@ class Solution {
             int vertex = temp.second.first;
             int stops = temp.first;
             for(auto x:adj[vertex]){
-                if(stops+1<=K+1 && vertexCost+x.second<cost[x.first]){
+                if(stops<=K && vertexCost+x.second<cost[x.first]){
                     cost[x.first]=vertexCost+x.second;
                     q.push({stops+1,{x.first,cost[x.first]}});
                 }
