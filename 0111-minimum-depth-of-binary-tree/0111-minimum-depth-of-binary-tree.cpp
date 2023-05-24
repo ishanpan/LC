@@ -17,33 +17,21 @@ public:
     int minDepth(TreeNode* root) {
         
         if(root==NULL){
-            return 0;   
-        }        
-        queue<TreeNode*>q;
-        q.push(root);
-        int levels = 0;
-        
-        while(!q.empty()){
-            int s = q.size();
-            for(int i=0;i<s;i++){
-                TreeNode* t = q.front();
-                q.pop();
-                if(t->left==NULL && t->right==NULL){
-                    return levels+1;
-                }
-                if(t->left){
-                    q.push(t->left);
-                }
-                if(t->right){
-                    q.push(t->right);
-                }
-
-            }
-           levels++;
-            
+            return 0;
+        }
+        if(root->left==NULL & root->right==NULL){
+            return 1;
         }
         
-        return levels;
+        if(root->left==NULL){
+            return 1+minDepth(root->right);
+        }
+        if(root->right==NULL){
+          return 1+minDepth(root->left);
+        }
         
+        return 1+min(minDepth(root->left),minDepth(root->right));
+        
+
     }
 };
