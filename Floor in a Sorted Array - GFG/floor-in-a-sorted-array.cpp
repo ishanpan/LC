@@ -25,15 +25,12 @@ class Solution{
             if(v[mid]==x){
                 return mid;
             }
-            if(v[mid]<x && x-v[mid]<diff){
-                floorE = mid;
-                diff = x-v[mid];
-            }
             
             if(x<v[mid]){
                 right = mid - 1;
             }
             else{
+                floorE = mid;
                 left = mid + 1;
             }
             
